@@ -13,7 +13,7 @@ from src.utils.AddUser import AddUser
 
 #times = sys.argv[1]
 
-work_path = os.getcwd()
+work_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 Log_path = work_path + "/output/"
 Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_Login_LogoutTrainer.txt"
 

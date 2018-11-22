@@ -14,7 +14,7 @@ if (len(sys.argv) < 2):
 
 PairTimes = sys.argv[1]
 work_path = os.getcwd()
-Log_path = work_path + "/output/"
+Log_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_NFCpairing.txt"
 NFClog_path = work_path + "/NFCLog/"
 NFClog_file = NFClog_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_NFC.txt"
