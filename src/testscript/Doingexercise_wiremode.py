@@ -2,9 +2,10 @@
 import os,datetime,sys
 
 from src.utils.Log import GetLog
-from src.utils.TrainingState import TrainingState
-from src.utils.Login_Logout import Login_Logout
-from src.utils.AddUser import AddUser
+from src.functionTest.TrainingState import TrainingState
+from src.functionTest.Login_Logout import Login_Logout
+from src.functionTest.AddUser import AddUser
+from src.utils.ProjectPath import work_path
 
 if len(sys.argv) < 3:
     print("Invalid parameters,please enter 3 parameters!")
@@ -12,7 +13,6 @@ if len(sys.argv) < 3:
 
 number1 = sys.argv[1]
 number2 = sys.argv[2]
-work_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 Log_path = work_path + "/output/"
 Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_Doingexercise_wiremode.txt"
 

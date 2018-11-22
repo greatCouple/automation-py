@@ -1,8 +1,8 @@
 # -- coding: utf-8 --
 from src.utils.ConductButton import ConductButton
 from src.utils.constant import const
-from src.utils.ManageAccount import ManageAccount
-from src.utils.InputPW import InputPW
+from src.functionTest.ManageAccount import ManageAccount
+from src.functionTest.InputPW import InputPW
 import time,sys
 
 

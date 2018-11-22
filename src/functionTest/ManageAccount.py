@@ -2,7 +2,7 @@
 import time
 from src.utils.ConductButton import ConductButton
 from src.utils.constant import const
-from src.utils.InputPW import InputPW
+from src.functionTest.InputPW import InputPW
 
 
 class ManageAccount:

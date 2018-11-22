@@ -3,9 +3,9 @@ import datetime,os
 
 
 from src.utils.Log import GetLog
-from src.utils.Login_Logout import Login_Logout
-from src.utils.AddUser import AddUser
-
+from src.functionTest.Login_Logout import Login_Logout
+from src.functionTest.AddUser import AddUser
+from src.utils.ProjectPath import work_path
 
 #if (len(sys.argv) < 2):
 #    print ("Invalid parameters,please enter 1 parameters!")
@@ -13,7 +13,6 @@ from src.utils.AddUser import AddUser
 
 #times = sys.argv[1]
 
-work_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 Log_path = work_path + "/output/"
 Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_Login_LogoutTrainer.txt"
 

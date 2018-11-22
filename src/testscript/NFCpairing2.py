@@ -1,17 +1,17 @@
 # -- coding: utf-8 --
 import threading, datetime, time, os, sys
 
-from src.utils.Login_Logout import Login_Logout
-from src.utils.AddUser import AddUser
+from src.functionTest.Login_Logout import Login_Logout
+from src.functionTest.AddUser import AddUser
 from src.utils.serport import SerialPort
 from src.utils.Log import GetLog
+from src.utils.ProjectPath import work_path
 
 if (len(sys.argv) < 2):
     print("Invalid parameters,please enter 1 parameter!")
     exit()
 
 PairTimes = sys.argv[1]
-work_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 Log_path = work_path + "/output/"
 Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_NFCpairing.txt"
 NFClog_path = work_path + "/NFCLog/"

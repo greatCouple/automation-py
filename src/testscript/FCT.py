@@ -3,14 +3,14 @@ import datetime
 import os, sys
 
 from src.utils.Log import GetLog
-from src.utils.TrainingState import TrainingState
-from src.utils.Login_Logout import Login_Logout
-from src.utils.AddUser import AddUser
+from src.functionTest.TrainingState import TrainingState
+from src.functionTest.Login_Logout import Login_Logout
+from src.functionTest.AddUser import AddUser
 from src.utils.ConductButton import ConductButton
 from src.utils.constant import const
-from src.utils.Change_Wifi import Change_Wifi
-from src.utils.SystemSetting import SystemSetting
-from src.utils.ManageAccount import ManageAccount
+from src.functionTest.Change_Wifi import Change_Wifi
+from src.functionTest.SystemSetting import SystemSetting
+from src.utils.ProjectPath import work_path
 
 if (len(sys.argv) < 2):
     print("Invalid parameters,please enter 1 parameter!")
@@ -18,7 +18,6 @@ if (len(sys.argv) < 2):
 
 times = sys.argv[1]
 # state = None
-work_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 Log_path = work_path + "/output/"
 Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_FCT.txt"
 

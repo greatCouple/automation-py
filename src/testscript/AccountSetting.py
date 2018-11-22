@@ -4,8 +4,9 @@ import os,sys,datetime
 from src.utils.constant import const
 from src.utils.Log import GetLog
 from src.utils.ConductButton import ConductButton
-from src.utils.Login_Logout import Login_Logout
-from src.utils.ManageAccount import ManageAccount
+from src.functionTest.Login_Logout import Login_Logout
+from src.functionTest.ManageAccount import ManageAccount
+from src.utils.ProjectPath import work_path
 
 if len(sys.argv) < 3:
     print("Invalid parameters,please enter 2 parameters!")
@@ -14,7 +15,6 @@ if len(sys.argv) < 3:
 number1 = sys.argv[1]
 number2 = sys.argv[2]
 
-work_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 Log_path = work_path + "/output/"
 Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_AccountSetting.txt"
 
