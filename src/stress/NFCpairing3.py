@@ -1,32 +1,24 @@
 # -- coding: utf-8 --
-import threading, datetime, time, os, sys
+import threading, time, sys
 
-from src.steps.Login_Logout import Login_Logout
+from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
 from src.utils.serport import SerialPort
 from src.utils.Log import GetLog
 from src.utils.constant import const
 from src.utils.ConductButton import ConductButton
-from src.utils.ProjectPath import work_path
+from src.utils.ProjectPath import Path
 
 if (len(sys.argv) < 2):
     print("Invalid parameters,please enter 1 parameter!")
     exit()
 
 PairTimes = sys.argv[1]
-Log_path = work_path + "/output/"
-Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_NFCpairing.txt"
-NFClog_path = work_path + "/NFCLog/"
-NFClog_file = NFClog_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_NFC.txt"
-
-if not os.path.exists(Log_path):
-    os.mkdir(Log_path)
-
-if not os.path.exists(NFClog_path):
-    os.mkdir(NFClog_path)
+Log_file = Path().logPath('NFCpairing')
+NFClog_file = Path().nfcLogPath('NFC')
 
 # 教练登陆
-Login_Logout().loginTrainer()
+LoginAndLogout().loginTrainer()
 
 match_state = None
 

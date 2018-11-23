@@ -1,16 +1,17 @@
 # -- coding: utf-8 --
-import time,re,os
-from appium import webdriver
 
-readDeviceId = list(os.popen('adb devices').readlines())
-device_id = re.findall(r'^\w*\b', readDeviceId[1])[0]
+#from src.stress.LoginAndLogoutTrainer import LoginAndLogoutTrainer
 
-desired_caps = {}
-desired_caps['platformName'] = 'Android'
-desired_caps['platformVersion'] = '7.1'
-desired_caps['deviceName'] = 'device_id'
-desired_caps['appPackage'] = 'fitshang.com.shaperlauncher'
-desired_caps['appActivity'] =  '.mvp.ui.view.main.MainActivity'
-desired_caps['automationName'] = 'uiautomator2'
-driver = webdriver.Remote('http://localhost:4723/wd/hub',desired_caps)	#启动app
-time.sleep(20)
+
+
+
+def runCase(self, sheetname):
+    self.caseList = self.readExcel(sheetname)
+    map = {"LoginAndLogoutTrainer.py": LoginAndLogoutTrainer()}
+    for case in self.caseList:
+        if case[1] != 0 & case[2] != 0:
+            map.get(case[0]).run(case[1], case[2])
+        if case[1] == 0 & case[2] != 0:
+            map.get(case[0]).run(case[2])
+        if case[1] != 0 & case[2] == 0:
+            map.get(case[0]).run(case[1])

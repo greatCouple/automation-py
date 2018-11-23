@@ -4,9 +4,9 @@ import os,sys,datetime
 from src.utils.constant import const
 from src.utils.Log import GetLog
 from src.utils.ConductButton import ConductButton
-from src.steps.Login_Logout import Login_Logout
+from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.ManageAccount import ManageAccount
-from src.utils.ProjectPath import work_path
+from src.utils.ProjectPath import Path
 
 if len(sys.argv) < 3:
     print("Invalid parameters,please enter 2 parameters!")
@@ -15,22 +15,17 @@ if len(sys.argv) < 3:
 number1 = sys.argv[1]
 number2 = sys.argv[2]
 
-Log_path = work_path + "/output/"
-Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_AccountSetting.txt"
-
-if not os.path.exists(Log_path):
-    os.mkdir(Log_path)
-
-
 # 管理员登陆
-Login_Logout().loginAdmin()
+LoginAndLogout().loginAdmin()
 ConductButton().clickButton(const.btn_AccountSetting)  # 点击账户设置
+
+logFile = Path().logPath('AccountSetting')
 
 if __name__ == "__main__":
     for m in range(int(number1)):
-        GetLog().log(Log_file, "counter: " + str(m))
+        GetLog().log(logFile, "counter: " + str(m))
         ManageAccount().deleteAll()
-        GetLog().log(Log_file, "Delete all the trainers!")
+        GetLog().log(logFile, "Delete all the trainers!")
         ManageAccount().createAccount("Maggie", "13652456845")
         ManageAccount().createAccount("Kitty", "18245623578")
         ManageAccount().createAccount("Cici", "15254623548")
@@ -39,9 +34,9 @@ if __name__ == "__main__":
     ConductButton().clickButton(const.btn_tab_user)  # 切换到学员添加界面
     NickName3 = ConductButton().getButton(const.btn_trainer_name).text
     for n in range(int(number2)):
-        GetLog().log(Log_file, "counter: " + str(n))
+        GetLog().log(logFile, "counter: " + str(n))
         ManageAccount().deleteAll()
-        GetLog().log(Log_file, "Delete all the users!")
+        GetLog().log(logFile, "Delete all the users!")
         ManageAccount().createAccount("Jeff", "15245879523")
         ManageAccount().createAccount("Jimi", "18245796583")
         ManageAccount().createAccount("Tomas", "15212548565")

@@ -108,3 +108,4 @@ output
 .idea
 __pycache__
 venv
+constant.py

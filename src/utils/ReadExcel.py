@@ -1,14 +1,12 @@
-import xlrd,os
-from src.utils.ProjectPath import work_path
-#from src.stress.LoginAndLogoutTrainer import LoginAndLogoutTrainer
-#from src.stress.AccountSetting import AccountSetting
+import xlrd, os
+from src.utils.ProjectPath import Path
+
 
 class ReadExcel:
-    file_path = work_path + "\\testcase\\"
-    xlrd.Book.encoding = "utf8"
-    file_name = file_path + 'TestCase.xls'
-
     def __init__(self):
+        self.file_path = Path().work_path + "\\testcase\\"
+        xlrd.Book.encoding = "utf8"
+        self.file_name = self.file_path + 'TestCase.xls'
         if os.path.exists(self.file_name):
             pass
         else:
@@ -21,21 +19,13 @@ class ReadExcel:
         self.rows_num = self.sheet.nrows  # 读取总行数
         self.cols_num = self.sheet.ncols  # 读取列列数
         for i in range(1,self.rows_num):
-            case = self.sheet.cell(i, 0).value
-            for j in range(1, self.rows_num):
-                times = self.sheet.cell(j, 1).value
-                times = int(times)
-                self._data.append(dict(case, times))
-        print(self._data)
+            self.case = self.sheet.cell(i, 0).value
+            self.firstArg = self.sheet.cell(i, 1).value
+            self.secondArg = self.sheet.cell(i, 1).value
+            self.firstArg = int(self.firstArg)
+            self.secondArg = int(self.secondArg)
+            self._data.append([self.case, self.firstArg, self.secondArg])
         return self._data
 
- #   def runCase(self, caseList):
-  #      map = {"LoginAndLogoutTrainer.py": LoginAndLogoutTrainer()}
-  #      for case in caseList:
-   #         if case[2] != 0:
-   #             map.get(case[0]).run(case[1])
 
-
-if __name__ == "__main__":
-    ReadExcel().readExcel('StressTest')
 

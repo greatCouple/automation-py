@@ -1,29 +1,23 @@
 # -- coding: utf-8 --
 import datetime
-import os, sys
+import sys
 
 from src.utils.Log import GetLog
 from src.steps.TrainingState import TrainingState
-from src.steps.Login_Logout import Login_Logout
+from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
 from src.utils.ConductButton import ConductButton
 from src.utils.constant import const
-from src.steps.Change_Wifi import Change_Wifi
+from src.steps.ChangeWifi import ChangeWifi
 from src.steps.SystemSetting import SystemSetting
-from src.utils.ProjectPath import work_path
+from src.utils.ProjectPath import Path
 
 if (len(sys.argv) < 2):
     print("Invalid parameters,please enter 1 parameter!")
     exit()
 
 times = sys.argv[1]
-# state = None
-Log_path = work_path + "/output/"
-Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_FCT.txt"
-
-if not os.path.exists(Log_path):
-    os.mkdir(Log_path)
-
+Log_file = Path().logPath('FCT')
 
 def doExercise():
     ConductButton().clickButton(const.btn_start)
@@ -44,7 +38,7 @@ def doExercise():
             GetLog().log(Log_file, "Professional mode!")
             ConductButton().clickButton(const.btn_Professional)
         TrainingState().Start()
-        Change_Wifi().changeWifi()
+        ChangeWifi().changeWifi()
         AddUser().addWirelessUser()
         TrainingState().Start()
         TrainingState().Pause()
@@ -54,12 +48,12 @@ def doExercise():
 
 for x in range(int(times)):
     GetLog().log(Log_file, "Round: " + str(x))
-    Login_Logout().loginAdmin()
+    LoginAndLogout().loginAdmin()
 #	ManageAccount().createTrainer_User()
     SystemSetting().systemSetting()
-    Login_Logout().logOut()
-    Login_Logout().loginTrainer()
+    LoginAndLogout().logOut()
+    LoginAndLogout().loginTrainer()
     AddUser().addWireUser()
     AddUser().addWirelessUser()
     doExercise()
-    Login_Logout().logOut()
+    LoginAndLogout().logOut()

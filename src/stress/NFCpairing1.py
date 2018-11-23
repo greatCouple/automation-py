@@ -1,31 +1,23 @@
 # -- coding: utf-8 --
-import threading, datetime, time, os, sys
+import threading, time, sys
 
-from src.steps.Login_Logout import Login_Logout
+from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
-from src.steps.Change_Wifi import Change_Wifi
+from src.steps.ChangeWifi import ChangeWifi
 from src.utils.serport import SerialPort
 from src.utils.Log import GetLog
-from src.utils.ProjectPath import work_path
+from src.utils.ProjectPath import Path
 
 if (len(sys.argv) < 2):
     print("Invalid parameters,please enter 1 parameter!")
     exit()
 
 PairTimes = sys.argv[1]
-Log_path = work_path + "/output/"
-Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_NFCpairing.txt"
-NFClog_path = work_path + "/NFCLog/"
-NFClog_file = NFClog_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_NFC.txt"
-
-if not os.path.exists(Log_path):
-    os.mkdir(Log_path)
-
-if not os.path.exists(NFClog_path):
-    os.mkdir(NFClog_path)
+Log_file = Path().logPath('NFCpairing')
+NFClog_file = Path().nfcLogPath('NFC')
 
 # 教练登陆
-Login_Logout().loginTrainer()
+LoginAndLogout().loginTrainer()
 
 match_state = None
 
@@ -52,7 +44,7 @@ def NFCPairing():
             GetLog().log(Log_file, "NFC Pairing failed !!! Failed counter: " + str(n))
         GetLog().log(Log_file, "NFC Pairing succeed !!! Succeed counter: " + str(x))
         GetLog().log(Log_file, "Change wifi id :" + str(x))
-        Change_Wifi().changeWifi()
+        ChangeWifi().changeWifi()
 
 
 def thread():

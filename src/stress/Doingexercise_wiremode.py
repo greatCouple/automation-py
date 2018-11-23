@@ -1,11 +1,11 @@
 # -- coding: utf-8 --
-import os,datetime,sys
+import sys
 
 from src.utils.Log import GetLog
 from src.steps.TrainingState import TrainingState
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
-from src.utils.ProjectPath import work_path
+from src.utils.ProjectPath import Path
 
 if len(sys.argv) < 3:
     print("Invalid parameters,please enter 3 parameters!")
@@ -13,11 +13,7 @@ if len(sys.argv) < 3:
 
 number1 = sys.argv[1]
 number2 = sys.argv[2]
-Log_path = work_path + "/output/"
-Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_Doingexercise_wiremode.txt"
-
-if not os.path.exists(Log_path):
-    os.mkdir(Log_path)
+Log_file = Path().logPath('WiremodeExercise')
 
 LoginAndLogout().loginTrainer()
 AddUser().addWireUser()

@@ -1,5 +1,5 @@
 # -- coding: utf-8 --
-from main import driver
+from src.utils.BaseApk import driver
 import time
 
 

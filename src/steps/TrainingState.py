@@ -4,6 +4,7 @@ from src.utils.constant import const
 from main import driver
 import time
 
+
 class TrainingState:
     state = None
     def data_add_by_progressbar(self):

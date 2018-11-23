@@ -3,10 +3,10 @@ from src.utils.ConductButton import ConductButton
 from src.utils.constant import const
 from src.steps.ManageAccount import ManageAccount
 from src.steps.InputPW import InputPW
-import time,sys
+import time, sys
 
 
-class LoginAndLogout():
+class LoginAndLogout:
     def loginTrainer(self):
         ConductButton().clickButton(const.btn_RelativeLayout)
         try:
