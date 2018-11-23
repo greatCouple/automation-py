@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from src.utils.ConductButton import ConductButton
 from src.utils.constant import const
-from src.steps.ManageAccount import ManageAccount
+from src.steps.AccountManagement import AccountManagement
 from src.steps.InputPW import InputPW
 import time, sys
 
@@ -18,7 +18,7 @@ class LoginAndLogout:
             print('Please add user!')
             self.logoutTrainer()
             self.loginAdmin()
-            ManageAccount().createTrainer_User()
+            AccountManagement().createTrainer_User()
             self.logOut()
             self.loginTrainer()
 

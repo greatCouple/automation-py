@@ -5,7 +5,7 @@ from src.utils.constant import const
 from src.steps.InputPW import InputPW
 
 
-class ManageAccount:
+class AccountManagement:
     # 创建账户
     def createAccount(self, account, password):
         self.account = account
