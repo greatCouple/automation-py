@@ -1,9 +1,9 @@
 # -- coding: utf-8 --
 import threading, datetime, time, os, sys
 
-from src.functionTest.Login_Logout import Login_Logout
-from src.functionTest.AddUser import AddUser
-from src.functionTest.Change_Wifi import Change_Wifi
+from src.steps.Login_Logout import Login_Logout
+from src.steps.AddUser import AddUser
+from src.steps.Change_Wifi import Change_Wifi
 from src.utils.serport import SerialPort
 from src.utils.Log import GetLog
 from src.utils.ProjectPath import work_path

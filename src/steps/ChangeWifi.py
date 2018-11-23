@@ -4,7 +4,7 @@ from src.utils.constant import const
 import time
 
 
-class Change_Wifi:
+class ChangeWifi:
     def changeWifi(self):
         ConductButton().clickButton(const.btn_top_wifi)
         try:

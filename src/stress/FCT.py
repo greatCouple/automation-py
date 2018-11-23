@@ -3,13 +3,13 @@ import datetime
 import os, sys
 
 from src.utils.Log import GetLog
-from src.functionTest.TrainingState import TrainingState
-from src.functionTest.Login_Logout import Login_Logout
-from src.functionTest.AddUser import AddUser
+from src.steps.TrainingState import TrainingState
+from src.steps.Login_Logout import Login_Logout
+from src.steps.AddUser import AddUser
 from src.utils.ConductButton import ConductButton
 from src.utils.constant import const
-from src.functionTest.Change_Wifi import Change_Wifi
-from src.functionTest.SystemSetting import SystemSetting
+from src.steps.Change_Wifi import Change_Wifi
+from src.steps.SystemSetting import SystemSetting
 from src.utils.ProjectPath import work_path
 
 if (len(sys.argv) < 2):

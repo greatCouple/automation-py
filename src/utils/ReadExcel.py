@@ -1,36 +1,41 @@
 import xlrd,os
 from src.utils.ProjectPath import work_path
+#from src.stress.LoginAndLogoutTrainer import LoginAndLogoutTrainer
+#from src.stress.AccountSetting import AccountSetting
 
 class ReadExcel:
     file_path = work_path + "\\testcase\\"
     xlrd.Book.encoding = "utf8"
     file_name = file_path + 'TestCase.xls'
-    file = xlrd.open_workbook(file_name)
+
+    def __init__(self):
+        if os.path.exists(self.file_name):
+            pass
+        else:
+            raise FileNotFoundError('测试用例不存在')
+        self._data = []
 
     def readExcel(self, sheetname):
-        global file
-        list = []
-        self.sheet = file.sheet_by_name(sheetname)
+        self.file = xlrd.open_workbook(self.file_name)
+        self.sheet = self.file.sheet_by_name(sheetname)
         self.rows_num = self.sheet.nrows  # 读取总行数
-        list.append(self.rows_num)
         self.cols_num = self.sheet.ncols  # 读取列列数
-        list.append(self.cols_num)
-        print (list)
-        return list
+        for i in range(1,self.rows_num):
+            case = self.sheet.cell(i, 0).value
+            for j in range(1, self.rows_num):
+                times = self.sheet.cell(j, 1).value
+                times = int(times)
+                self._data.append(dict(case, times))
+        print(self._data)
+        return self._data
+
+ #   def runCase(self, caseList):
+  #      map = {"LoginAndLogoutTrainer.py": LoginAndLogoutTrainer()}
+  #      for case in caseList:
+   #         if case[2] != 0:
+   #             map.get(case[0]).run(case[1])
+
 
 if __name__ == "__main__":
-    file_path = work_path + "\\testcase\\"
-    xlrd.Book.encoding = "utf8"
-    file_name = file_path + 'TestCase.xls'
-    file = xlrd.open_workbook(file_name)
-    sheet = file.sheet_by_name('StressTest')
-    list = ReadExcel().readExcel('StressTest')
-    rows_num = list[0]
-    cols_num = list[1]
-    for i in range(1, rows_num):
-        name = sheet.cell(i, 0).value
-        name1 = sheet.cell(i, 1).value
-        name1 = int(name1)
-        Script_name = name + '\t' + str(name1)
-        print(Script_name)
-        os.system(Script_name)
+    ReadExcel().readExcel('StressTest')
+

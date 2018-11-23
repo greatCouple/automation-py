@@ -2,9 +2,9 @@
 import os,datetime,sys
 
 from src.utils.Log import GetLog
-from src.functionTest.TrainingState import TrainingState
-from src.functionTest.Login_Logout import Login_Logout
-from src.functionTest.AddUser import AddUser
+from src.steps.TrainingState import TrainingState
+from src.steps.LoginAndLogout import LoginAndLogout
+from src.steps.AddUser import AddUser
 from src.utils.ProjectPath import work_path
 
 if len(sys.argv) < 3:
@@ -19,7 +19,7 @@ Log_file = Log_path + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + "_
 if not os.path.exists(Log_path):
     os.mkdir(Log_path)
 
-Login_Logout().loginTrainer()
+LoginAndLogout().loginTrainer()
 AddUser().addWireUser()
 
 
@@ -40,4 +40,3 @@ def Start_Stop():
 if __name__ == "__main__":
     Start_Pause()
     Start_Stop()
-# driver.quit()

@@ -4,8 +4,8 @@ import os,sys,datetime
 from src.utils.constant import const
 from src.utils.Log import GetLog
 from src.utils.ConductButton import ConductButton
-from src.functionTest.Login_Logout import Login_Logout
-from src.functionTest.ManageAccount import ManageAccount
+from src.steps.Login_Logout import Login_Logout
+from src.steps.ManageAccount import ManageAccount
 from src.utils.ProjectPath import work_path
 
 if len(sys.argv) < 3:

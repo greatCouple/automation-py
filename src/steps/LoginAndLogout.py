@@ -1,12 +1,12 @@
 # -- coding: utf-8 --
 from src.utils.ConductButton import ConductButton
 from src.utils.constant import const
-from src.functionTest.ManageAccount import ManageAccount
-from src.functionTest.InputPW import InputPW
+from src.steps.ManageAccount import ManageAccount
+from src.steps.InputPW import InputPW
 import time,sys
 
 
-class Login_Logout():
+class LoginAndLogout():
     def loginTrainer(self):
         ConductButton().clickButton(const.btn_RelativeLayout)
         try:
