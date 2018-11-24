@@ -1,5 +1,5 @@
 # -- coding: utf-8 --
-from src.utils.ButtonUtil import ButtonUtils
+from src.utils.ButtonManger import ButtonManger
 from src.utils.constant import const
 from src.utils.serport import SerialPort
 import time
@@ -7,27 +7,27 @@ import time
 class AddUser:
     def clickAdd(self):
         try:
-            ButtonUtils.clickButton(const.btn_add_user)
+            ButtonManger.clickButton(const.btn_add_user)
         except:
-            ButtonUtils.clickButton(const.btn_tab_add)
+            ButtonManger.clickButton(const.btn_tab_add)
         try:
-            while ButtonUtils.getButton(const.btn_manual_add):
-                ButtonUtils.getButton(const.btn_manual_add).click()
+            while ButtonManger.getButton(const.btn_manual_add):
+                ButtonManger.getButton(const.btn_manual_add).click()
         except Exception as e:
             pass
-        ButtonUtils.clickButton(const.btn_user_save)
+        ButtonManger.clickButton(const.btn_user_save)
 
     # 教练添加有线模式学员
     def addWireUser(self):
         self.clickAdd()
-        ButtonUtils.clickButton(const.btn_wire_mode)  # 选择有线模式
+        ButtonManger.clickButton(const.btn_wire_mode)  # 选择有线模式
         time.sleep(8)
 
     # 教练添加无线模式学员
     def addWirelessUser(self):
         time.sleep(2)
         self.clickAdd()
-        ButtonUtils.clickButton(const.btn_wireless_mode)  # 选择无线模式
+        ButtonManger.clickButton(const.btn_wireless_mode)  # 选择无线模式
         SerialPort().switchAdb()
         print("Pairing!!!")
         time.sleep(40)
@@ -35,7 +35,7 @@ class AddUser:
         self.result = None
         n = 0
         try:
-            self.result = ButtonUtils.getButton(const.btn_wireless_mode)
+            self.result = ButtonManger.getButton(const.btn_wireless_mode)
             while self.result:
                 n += 1
                 print("NFC Pairing failed !!! Failed counter: " + str(n))
@@ -44,19 +44,19 @@ class AddUser:
                 print("Pairing!!!")
                 time.sleep(40)
                 print("End of match")
-                self.result = ButtonUtils.getButton(const.btn_wireless_mode)
+                self.result = ButtonManger.getButton(const.btn_wireless_mode)
         except Exception as e:
             print("NFC Pairing succeed !!!")
 
     def chooseWirelessMode(self):
-        ButtonUtils.clickButton(const.btn_wireless_mode)  # 选择无线模式
+        ButtonManger.clickButton(const.btn_wireless_mode)  # 选择无线模式
         SerialPort().switchAdb()
         print("Pairing!!!")
         time.sleep(45)
         print("End of match")
         self.result = None
         try:
-            self.result = ButtonUtils.getButton(const.btn_wireless_mode)
+            self.result = ButtonManger.getButton(const.btn_wireless_mode)
             time.sleep(5)
             if self.result:
                 self.result = True

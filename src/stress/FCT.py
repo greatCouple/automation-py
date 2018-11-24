@@ -4,7 +4,7 @@ from src.utils.LogUtil import LogUtil
 from src.steps.TrainingState import TrainingState
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
-from src.utils.ButtonUtil import ButtonUtils
+from src.utils.ButtonManger import ButtonManger
 from src.utils.constant import const
 from src.steps.ChangeWifi import ChangeWifi
 from src.steps.SystemSetting import SystemSetting
@@ -25,30 +25,30 @@ class FunctionTest:
         self.Log_file = Path().logPath('FCT')
 
     def doExercise(self):
-        ButtonUtils.clickButton(const.btn_start)
+        ButtonManger.clickButton(const.btn_start)
         for x in range(1, 6):
             if x == 1:
                 LogUtil.log(self.Log_file, "Muscle Development mode!")
-                ButtonUtils.clickButton(const.btn_MuscleDevelopment)
+                ButtonManger.clickButton(const.btn_MuscleDevelopment)
             if x == 2:
                 LogUtil.log(self.Log_file, "Cardiovascular mode!")
-                ButtonUtils.clickButton(const.btn_Cardiovascular)
+                ButtonManger.clickButton(const.btn_Cardiovascular)
             if x == 3:
                 LogUtil.log(self.Log_file, "Relax mode!")
-                ButtonUtils.clickButton(const.btn_Relax)
+                ButtonManger.clickButton(const.btn_Relax)
             if x == 4:
                 LogUtil.log(self.Log_file, "Manual Setting mode!")
-                ButtonUtils.clickButton(const.btn_ManualSetting)
+                ButtonManger.clickButton(const.btn_ManualSetting)
             if x == 5:
                 LogUtil.log(self.Log_file, "Professional mode!")
-                ButtonUtils.clickButton(const.btn_Professional)
+                ButtonManger.clickButton(const.btn_Professional)
             TrainingState().Start()
             ChangeWifi().changeWifi()
             AddUser().addWirelessUser()
             TrainingState().Start()
             TrainingState().Pause()
             TrainingState().Stop()
-            ButtonUtils.clickButton(const.btn_back)
+            ButtonManger.clickButton(const.btn_back)
 
     def run(self, times):
         for n in range(int(times)):

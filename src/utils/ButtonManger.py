@@ -1,9 +1,9 @@
 # -- coding: utf-8 --
-from src.utils.BaseApk import driver
+from src.utils.StartApp import driver
 import time
 
 
-class ButtonUtils:
+class ButtonManger:
     @staticmethod
     def getButton(buttonName):
         if "id/" in buttonName:
@@ -15,7 +15,7 @@ class ButtonUtils:
 
     @staticmethod
     def clickButton(buttonName):
-        button = ButtonUtils.getButton(buttonName)
+        button = ButtonManger.getButton(buttonName)
         if button:
             button.click()
             time.sleep(2)

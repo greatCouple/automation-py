@@ -3,7 +3,7 @@ import sys
 
 from src.utils.constant import const
 from src.utils.LogUtil import LogUtil
-from src.utils.ButtonUtil import ButtonUtils
+from src.utils.ButtonManger import ButtonManger
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AccountManagement import AccountManagement
 from src.utils.ProjectPath import Path
@@ -24,7 +24,7 @@ class AccountSetting:
     def __init__(self):
         # 管理员登陆
         LoginAndLogout().loginAdmin()
-        ButtonUtils.clickButton(const.btn_AccountSetting)  # 点击账户设置
+        ButtonManger.clickButton(const.btn_AccountSetting)  # 点击账户设置
         self.logFile = Path().logPath('AccountSetting')
 
     def addTrainer(self, trainerTimes):
@@ -37,7 +37,7 @@ class AccountSetting:
                 AccountManagement().createAccount(key, trainers.get(key))
 
     def addUser(self, userTimes):
-        ButtonUtils.clickButton(const.btn_tab_user)  # 切换到学员添加界面
+        ButtonManger.clickButton(const.btn_tab_user)  # 切换到学员添加界面
         for n in range(int(userTimes)):
             LogUtil.log(self.logFile, "counter: " + str(n))
             AccountManagement().deleteAll()

@@ -6,7 +6,7 @@ from src.steps.AddUser import AddUser
 from src.utils.serport import SerialPort
 from src.utils.LogUtil import LogUtil
 from src.utils.constant import const
-from src.utils.ButtonUtil import ButtonUtils
+from src.utils.ButtonManger import ButtonManger
 from src.utils.ProjectPath import Path
 
 
@@ -34,8 +34,8 @@ class NFCPair3:
         t1.start()
         n = 0
         AddUser().addWireUser()
-        ButtonUtils.clickButton(const.btn_start)
-        ButtonUtils.clickButton(const.btn_MuscleDevelopment)
+        ButtonManger.clickButton(const.btn_start)
+        ButtonManger.clickButton(const.btn_MuscleDevelopment)
         for x in range(int(pairTimes)):
             AddUser().clickAdd()
             while AddUser().chooseWirelessMode():
