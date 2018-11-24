@@ -7,6 +7,7 @@ from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
 from src.utils.ProjectPath import Path
 
+
 def transferArgv():
     if len(sys.argv) < 3:
         print("Invalid parameters,please enter 2 parameters!")
@@ -14,11 +15,12 @@ def transferArgv():
 
     number1 = sys.argv[1]
     number2 = sys.argv[2]
-    return [number1,number2]
+    return [number1, number2]
+
 
 class WireModeDoExercise:
     def __init__(self):
-        self.Log_file = Path().logPath('WiremodeExercise')
+        self.Log_file = Path().logPath('WireModeExercise')
         LoginAndLogout().loginTrainer()
         AddUser().addWireUser()
 
@@ -38,8 +40,6 @@ class WireModeDoExercise:
     def run(self, number1, number2):
         self.Start_Pause(number1)
         self.Start_Pause(number2)
-
-
 
 
 if __name__ == "__main__":

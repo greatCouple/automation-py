@@ -1,5 +1,5 @@
 # -- coding: utf-8 --
-import threading, time, sys
+import threading, time
 
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
@@ -9,60 +9,50 @@ from src.utils.constant import const
 from src.utils.ConductButton import ConductButton
 from src.utils.ProjectPath import Path
 
-if (len(sys.argv) < 2):
-    print("Invalid parameters,please enter 1 parameter!")
-    exit()
 
-PairTimes = sys.argv[1]
-Log_file = Path().logPath('NFCpairing')
-NFClog_file = Path().nfcLogPath('NFC')
+class NFCPair3:
+    def __init__(self):
+        self.Log_file = Path().logPath('NFCPair')
+        self.NFClog_file = Path().nfcLogPath('NFC')
+        # 教练登陆
+        LoginAndLogout().loginTrainer()
 
-# 教练登陆
-LoginAndLogout().loginTrainer()
+    def SaveLog(self):
+        SerialPort.serport.write('\r$EMD9\r')
+        time.sleep(1)
+        SerialPort.serport.write('\r$EMD4\r')
+        time.sleep(1)
+        while True:
+            #		if str_towrite is not None:
+            #			serport.write(str_towrite)
+            #			str_towrite = None
+            data = SerialPort.serport.readline()
+            GetLog().log(self.NFClog_file, repr(data))
 
-match_state = None
+    def NFCPairing(self, pairTimes):
+        t1 = threading.Thread(target=self.SaveLog)
+        t1.start()
+        n = 0
+        AddUser().addWireUser()
+        ConductButton().clickButton(const.btn_start)
+        ConductButton().clickButton(const.btn_MuscleDevelopment)
+        for x in range(int(pairTimes)):
+            AddUser().clickAdd()
+            while AddUser().chooseWirelessMode():
+                n += 1
+                GetLog().log(self.Log_file, "NFC Pairing failed !!! Failed counter: " + str(n))
+            GetLog().log(self.Log_file, "NFC Pairing succeed !!! Succeed counter: " + str(x))
 
+    def thread(self, pairTimes):
+        t2 = threading.Thread(target=self.NFCPairing(pairTimes))
+        t2.setDaemon(True)
+        t2.start()
+        t2.join()
 
-def SaveLog():
-    global match_state
-    SerialPort.serport.write('\r$EMD9\r')
-    time.sleep(1)
-    SerialPort.serport.write('\r$EMD4\r')
-    time.sleep(1)
-    while True:
-        #		if str_towrite is not None:
-        #			serport.write(str_towrite)
-        #			str_towrite = None
-        data = SerialPort.serport.readline()
-        GetLog().log(NFClog_file, repr(data))
-        if match_state == True:
-            break
-
-
-def NFCPairing():
-    n = 0
-    AddUser().addWireUser()
-    ConductButton().clickButton(const.btn_start)
-    ConductButton().clickButton(const.btn_MuscleDevelopment)
-    for x in range(int(PairTimes)):
-        AddUser().clickAdd()
-        while AddUser().chooseWirelessMode():
-            n += 1
-            GetLog().log(Log_file, "NFC Pairing failed !!! Failed counter: " + str(n))
-        GetLog().log(Log_file, "NFC Pairing succeed !!! Succeed counter: " + str(x))
-
-
-def thread():
-    global match_state
-    t1 = threading.Thread(target=SaveLog)
-    t2 = threading.Thread(target=NFCPairing)
-    t1.start()
-    t2.start()
-    t2.join()
-    match_state = True
-    return match_state
+    def run(self, pairTimes):
+        self.thread(pairTimes)
 
 
 if __name__ == "__main__":
-    thread()
+    NFCPair3().thread(2)
 #	driver.quit()

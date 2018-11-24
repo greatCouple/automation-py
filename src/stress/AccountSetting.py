@@ -8,6 +8,7 @@ from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AccountManagement import AccountManagement
 from src.utils.ProjectPath import Path
 
+
 def transferArgv():
     if len(sys.argv) < 3:
         print("Invalid parameters,please enter 2 parameters!")
@@ -15,7 +16,8 @@ def transferArgv():
 
     number1 = sys.argv[1]
     number2 = sys.argv[2]
-    return [number1,number2]
+    return [number1, number2]
+
 
 class AccountSetting:
     def __init__(self):
@@ -24,7 +26,7 @@ class AccountSetting:
         ConductButton().clickButton(const.btn_AccountSetting)  # 点击账户设置
         self.logFile = Path().logPath('AccountSetting')
 
-    def manageAccout(self, trainerTimes, userTimes):
+    def addTrainer(self, trainerTimes, trainerConfig):
         for m in range(int(trainerTimes)):
             GetLog().log(self.logFile, "counter: " + str(m))
             AccountManagement().deleteAll()
@@ -33,8 +35,9 @@ class AccountSetting:
             AccountManagement().createAccount("Kitty", "18245623578")
             AccountManagement().createAccount("Cici", "15254623548")
             AccountManagement().createAccount("Tom", "13145684615")
+
+    def addUser(self, userTimes):
         ConductButton().clickButton(const.btn_tab_user)  # 切换到学员添加界面
-#        self.NickName3 = ConductButton().getButton(const.btn_trainer_name).text
         for n in range(int(userTimes)):
             GetLog().log(self.logFile, "counter: " + str(n))
             AccountManagement().deleteAll()
@@ -45,8 +48,9 @@ class AccountSetting:
             AccountManagement().createAccount("Jane", "15245898745")
 
     def run(self, trainerTimes, userTimes):
-        self.manageAccout(trainerTimes, userTimes)
+        self.addTrainer(trainerTimes)
+        self.addUser(userTimes)
 
 
 if __name__ == "__main__":
-    AccountSetting().manageAccout(2, 2)
+    AccountSetting().manageAccount(2, 2)
