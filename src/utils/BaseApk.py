@@ -1,16 +1,20 @@
 import time,re,os
 from appium import webdriver
+from src.utils.YamlUtil import YamlUtil
 
 
-readDeviceId = list(os.popen('adb devices').readlines())
-device_id = re.findall(r'^\w*\b', readDeviceId[1])[0]
+class Init:
+    @staticmethod
+    def startApp():
+        readDeviceId = list(os.popen('adb devices').readlines())
+        device_id = re.findall(r'^\w*\b', readDeviceId[1])[0]
+        driverConfig = YamlUtil.read('driverConfig')
+        print(driverConfig.get('url'))
+        desired_caps = driverConfig.get('desired_caps')
+        desired_caps['deviceName'] = device_id
+        driver = webdriver.Remote(driverConfig.get('url'), desired_caps)  # 启动app
+        time.sleep(20)
 
-desired_caps = {}
-desired_caps['platformName'] = 'Android'
-desired_caps['platformVersion'] = '7.1'
-desired_caps['deviceName'] = 'device_id'
-desired_caps['appPackage'] = 'fitshang.com.shaperlauncher'
-desired_caps['appActivity'] = '.mvp.ui.view.main.MainActivity'
-desired_caps['automationName'] = 'uiautomator2'
-driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)  # 启动app
-time.sleep(20)
+
+if __name__ == '__main__':
+    Init.startApp()

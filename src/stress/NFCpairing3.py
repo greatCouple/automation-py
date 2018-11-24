@@ -6,7 +6,7 @@ from src.steps.AddUser import AddUser
 from src.utils.serport import SerialPort
 from src.utils.LogUtil import LogUtil
 from src.utils.constant import const
-from src.utils.ButtonUtils import ButtonUtils
+from src.utils.ButtonUtil import ButtonUtils
 from src.utils.ProjectPath import Path
 
 

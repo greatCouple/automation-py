@@ -1,4 +1,4 @@
-from src.utils.ButtonUtils import ButtonUtils
+from src.utils.ButtonUtil import ButtonUtils
 from src.utils.constant import const
 
 class InputPW:

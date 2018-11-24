@@ -1,0 +1,7 @@
+desired_caps:
+  platformName: 'Android'
+  platformVersion: '7.1'
+  appPackage: 'fitshang.com.shaperlauncher'
+  appActivity: '.mvp.ui.view.main.MainActivity'
+  automationName: 'uiautomator2'
+url: 'http://localhost:4723/wd/hub'

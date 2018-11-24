@@ -1,5 +1,5 @@
 # -- coding: utf-8 --
-from src.utils.ButtonUtils import ButtonUtils
+from src.utils.ButtonUtil import ButtonUtils
 from src.utils.constant import const
 from main import driver
 import time

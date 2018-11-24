@@ -3,11 +3,11 @@ import sys
 
 from src.utils.constant import const
 from src.utils.LogUtil import LogUtil
-from src.utils.ButtonUtils import ButtonUtils
+from src.utils.ButtonUtil import ButtonUtils
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AccountManagement import AccountManagement
 from src.utils.ProjectPath import Path
-from src.utils.ReadYaml import ReadYaml
+from src.utils.YamlUtil import YamlUtil
 
 
 def transferArgv():
@@ -32,7 +32,7 @@ class AccountSetting:
             LogUtil.log(self.logFile, "counter: " + str(m))
             AccountManagement().deleteAll()
             LogUtil.log(self.logFile, "Delete all the trainers!")
-            trainers = ReadYaml().readYaml('trainer')
+            trainers = YamlUtil.read('trainer')
             for key in trainers.keys():
                 AccountManagement().createAccount(key, trainers.get(key))
 
@@ -42,7 +42,7 @@ class AccountSetting:
             LogUtil.log(self.logFile, "counter: " + str(n))
             AccountManagement().deleteAll()
             LogUtil.log(self.logFile, "Delete all the users!")
-            users = ReadYaml().readYaml('user')
+            users = YamlUtil.read('user')
             for key in users.keys():
                 AccountManagement().createAccount(key, users.get(key))
 

@@ -4,7 +4,7 @@ from src.utils.LogUtil import LogUtil
 from src.steps.TrainingState import TrainingState
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
-from src.utils.ButtonUtils import ButtonUtils
+from src.utils.ButtonUtil import ButtonUtils
 from src.utils.constant import const
 from src.steps.ChangeWifi import ChangeWifi
 from src.steps.SystemSetting import SystemSetting

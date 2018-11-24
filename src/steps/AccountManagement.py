@@ -1,9 +1,9 @@
 # -- coding: utf-8 --
 import time
-from src.utils.ButtonUtils import ButtonUtils
+from src.utils.ButtonUtil import ButtonUtils
 from src.utils.constant import const
 from src.steps.InputPW import InputPW
-from src.utils.ReadYaml import ReadYaml
+from src.utils.YamlUtil import YamlUtil
 
 
 class AccountManagement:
@@ -59,7 +59,7 @@ class AccountManagement:
         if self.nickname2 != "Add New Account":
             self.deleteAll()
             print("Delete all the trainers!")
-        trainers = ReadYaml().readYaml('trainer')
+        trainers = YamlUtil.read('trainer')
         for key in trainers.keys():
             AccountManagement().createAccount(key, trainers.get(key))
         ButtonUtils.clickButton(const.btn_tab_user)  # 切换到学员添加界面
@@ -69,7 +69,7 @@ class AccountManagement:
         if self.nickname3 != "Add New Account":
             self.deleteAll()
             print("Delete all the users!")
-        users = ReadYaml().readYaml('user')
+        users = YamlUtil.read('user')
         for key in users.keys():
             AccountManagement().createAccount(key, users.get(key))
         ButtonUtils.clickButton(const.btn_back)
