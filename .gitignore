@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+#Windows
+NFCLog
+output
+.idea
+__pycache__
+venv
+constant.py
