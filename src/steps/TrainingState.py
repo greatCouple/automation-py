@@ -1,5 +1,5 @@
 # -- coding: utf-8 --
-from src.utils.ConductButton import ConductButton
+from src.utils.ButtonUtils import ButtonUtils
 from src.utils.constant import const
 from main import driver
 import time
@@ -10,7 +10,7 @@ class TrainingState:
     def data_add_by_progressbar(self):
         for x in range(0, 3):
             try:
-                self.progress_bar = ConductButton().getButton(const.btn_progress_bar)
+                self.progress_bar = ButtonUtils.getButton(const.btn_progress_bar)
                 if self.progress_bar:
                     driver.swipe(560, 853, 1300, 853, 1)
             except Exception as e:
@@ -22,7 +22,7 @@ class TrainingState:
     def data_dec_by_progressbar(self):
         for x in range(0, 3):
             try:
-                self.progress_bar = ConductButton().getButton(const.btn_progress_bar)
+                self.progress_bar = ButtonUtils.getButton(const.btn_progress_bar)
                 if self.progress_bar:
                     driver.swipe(1300, 853, 560, 853, 1)
             except Exception as e:
@@ -34,19 +34,19 @@ class TrainingState:
     def get_training_state(self):
         global state
         try:
-            self.Button = ConductButton().getButton(const.btn_name).text
+            self.Button = ButtonUtils.getButton(const.btn_name).text
             if self.Button:
                 state = "Stopped"
         except Exception as e:
             pass
         try:
-            self.start_time = ConductButton().getButton(const.btn_tainer_time_small).text
+            self.start_time = ButtonUtils.getButton(const.btn_tainer_time_small).text
             if self.start_time:
                 self.state = "Started"
         except Exception as e:
             pass
         try:
-            self.pause_text = ConductButton().getButton(const.btn_pasue_text).text
+            self.pause_text = ButtonUtils.getButton(const.btn_pasue_text).text
             if self.pause_text == 'Paused':
                 state = "Paused"
         except Exception as e:
@@ -55,32 +55,32 @@ class TrainingState:
 
     def Start(self):
         global state
-        ConductButton().clickButton(const.btn_start)  # 开始运动
+        ButtonUtils.clickButton(const.btn_start)  # 开始运动
         time.sleep(2)
         self.state = self.get_training_state()
         if self.state != 'Started':
             print("Failed to start")
-            ConductButton().clickButton(const.btn_start)
+            ButtonUtils.clickButton(const.btn_start)
         else:
             print("Started successfully!")
         time.sleep(7)
         try:
-            self.progress_bar = ConductButton().getButton(const.btn_progress_bar)
+            self.progress_bar = ButtonUtils.getButton(const.btn_progress_bar)
             if not self.progress_bar:
-                ConductButton().clickButton(const.btn_master)
+                ButtonUtils.clickButton(const.btn_master)
         except Exception as e:
             pass
         self.data_add_by_progressbar()
         self.data_dec_by_progressbar()
         self.data_add_by_progressbar()
-        ConductButton().clickButton(const.btn_abdomen)
+        ButtonUtils.clickButton(const.btn_abdomen)
         self.data_add_by_progressbar()
         self.data_dec_by_progressbar()
         self.data_add_by_progressbar()
 
     def Pause(self):
         global state
-        ConductButton().clickButton(const.btn_start)  # 暂停运动
+        ButtonUtils.clickButton(const.btn_start)  # 暂停运动
         time.sleep(2)
         self.state = self.get_training_state()
         if self.state != "Paused":
@@ -92,7 +92,7 @@ class TrainingState:
 
     def Stop(self):
         global state
-        ConductButton().clickButton(const.btn_back)  # 停止运动
+        ButtonUtils.clickButton(const.btn_back)  # 停止运动
         time.sleep(2)
         self.state = self.get_training_state()
         if self.state != "Stopped":

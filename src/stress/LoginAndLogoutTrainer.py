@@ -1,5 +1,5 @@
 # -- coding: utf-8 --
-from src.utils.Log import GetLog
+from src.utils.LogUtil import LogUtil
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
 from src.utils.ProjectPath import Path
@@ -16,7 +16,7 @@ class LoginAndLogoutTrainer:
             AddUser().clickAdd()
             AddUser().addWireUser()
             LoginAndLogout().logoutTrainer()
-            GetLog().log(self.logFile, "Times " + str(x))
+            LogUtil.log(self.logFile, "Times " + str(x))
 
     def run(self, times):
         self.loginAndLogoutTrainer(times)

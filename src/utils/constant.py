@@ -1,5 +1,6 @@
 # -- coding: utf-8 --
 
+
 class Const(object):
     class ConstError(TypeError):
         pass

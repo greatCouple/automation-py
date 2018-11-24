@@ -13,9 +13,7 @@ class Path:
             os.mkdir(self.nfcLogPath)
 
     def logPath(self, testModule):
-        self.logFile = self.logPath + testModule + '_' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + ".log"
-        return self.logFile
+        return self.logPath + testModule + '_' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + ".log"
 
     def nfcLogPath(self, testModule):
-        self.logFile = self.nfcLogPath + testModule + '_' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + ".log"
-        return self.logFile
+        return self.nfcLogPath + testModule + '_' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + ".log"

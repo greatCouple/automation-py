@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 import sys
 
-from src.utils.Log import GetLog
+from src.utils.LogUtil import LogUtil
 from src.steps.TrainingState import TrainingState
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
@@ -24,24 +24,24 @@ class WireModeDoExercise:
         LoginAndLogout().loginTrainer()
         AddUser().addWireUser()
 
-    def Start_Pause(self, number1):
+    def startAndPause(self, number1):
         TrainingState().Start()
         for m in range(int(number1)):
-            GetLog().log(self.Log_file, "pause counter: " + str(m))
+            LogUtil.log(self.Log_file, "pause counter: " + str(m))
             TrainingState().Pause()
             TrainingState().Start()
 
-    def Start_Stop(self, number2):
+    def startAndStop(self, number2):
         for n in range(int(number2)):
-            GetLog().log(self.Log_file, "stop counter: " + str(n))
+            LogUtil.log(self.Log_file, "stop counter: " + str(n))
             TrainingState().Stop()
             TrainingState().Start()
 
     def run(self, number1, number2):
-        self.Start_Pause(number1)
-        self.Start_Pause(number2)
+        self.startAndPause(number1)
+        self.startAndPause(number2)
 
 
 if __name__ == "__main__":
-    WireModeDoExercise().Start_Pause(3)
-    WireModeDoExercise().Start_Stop(3)
+    WireModeDoExercise().startAndPause(3)
+    WireModeDoExercise().startAndStop(3)

@@ -4,7 +4,7 @@ import threading, time, sys
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
 from src.utils.serport import SerialPort
-from src.utils.Log import GetLog
+from src.utils.LogUtil import LogUtil
 from src.utils.ProjectPath import Path
 
 
@@ -25,7 +25,7 @@ class NFCPair2:
         time.sleep(1)
         while True:
             data = SerialPort.serport.readline()
-            GetLog().log(self.NFClog_file, repr(data))
+            LogUtil.log(self.NFClog_file, repr(data))
 
     def NFCPairing(self, pairTimes):
         t1 = threading.Thread(target=self.SaveLog)
@@ -35,8 +35,8 @@ class NFCPair2:
             AddUser().clickAdd()
             while AddUser().chooseWirelessMode():
                 n += 1
-                GetLog().log(self.Log_file, "NFC Pairing failed !!! Failed counter: " + str(n))
-            GetLog().log(self.Log_file, "NFC Pairing succeed !!! Succeed counter: " + str(x))
+                LogUtil.log(self.Log_file, "NFC Pairing failed !!! Failed counter: " + str(n))
+            LogUtil.log(self.Log_file, "NFC Pairing succeed !!! Succeed counter: " + str(x))
 
     def thread(self, pairTimes):
         t2 = threading.Thread(target=self.NFCPairing(pairTimes))

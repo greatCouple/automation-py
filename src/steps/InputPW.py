@@ -1,9 +1,9 @@
-from src.utils.ConductButton import ConductButton
+from src.utils.ButtonUtils import ButtonUtils
 from src.utils.constant import const
 
 class InputPW:
     def inputPW(self):
-        ConductButton().clickButton(const.btn_one)
-        ConductButton().clickButton(const.btn_two)
-        ConductButton().clickButton(const.btn_three)
-        ConductButton().clickButton(const.btn_four)
+        ButtonUtils.clickButton(const.btn_one)
+        ButtonUtils.clickButton(const.btn_two)
+        ButtonUtils.clickButton(const.btn_three)
+        ButtonUtils.clickButton(const.btn_four)
