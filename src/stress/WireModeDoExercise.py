@@ -6,6 +6,7 @@ from src.steps.TrainingState import TrainingState
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
 from src.utils.LogPath import Path
+from src.utils.serport import serport
 
 
 def transferArgv():
@@ -41,6 +42,7 @@ class WireModeDoExercise:
         LogUtil.log(self.Log_file, "Start WireModeDoExercise test !!!")
         self.startAndPause(number1)
         self.startAndPause(number2)
+        serport.close()
 
 
 if __name__ == "__main__":

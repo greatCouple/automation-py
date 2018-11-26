@@ -18,7 +18,7 @@ class ReadExcel:
         self.sheet = self.file.sheet_by_name(sheetName)
         self.rows_num = self.sheet.nrows  # 读取总行数
         self.cols_num = self.sheet.ncols  # 读取列列数
-        for i in range(1,self.rows_num):
+        for i in range(1, self.rows_num):
             self.case = self.sheet.cell(i, 0).value
             self.firstArg = self.sheet.cell(i, 1).value
             self.secondArg = self.sheet.cell(i, 1).value

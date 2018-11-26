@@ -53,4 +53,4 @@ class AccountSetting:
 
 
 if __name__ == "__main__":
-    AccountSetting().run(1, 1)
+    AccountSetting().run(0, 1)

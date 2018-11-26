@@ -1,4 +1,3 @@
-import os
 
 
 class Const(object):
@@ -11,7 +10,6 @@ class Const(object):
 
 const = Const()
 
-const.work_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 const.btn_add_user = "fitshang.com.shaperlauncher:id/iv_add_user"
 const.btn_tab_add = "fitshang.com.shaperlauncher:id/tv_tab_add"
 const.btn_manual_add = "fitshang.com.shaperlauncher:id/rtv_manual_check"

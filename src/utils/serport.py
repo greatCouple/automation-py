@@ -1,11 +1,15 @@
 # -- coding: utf-8 --
 import serial
 
+serport = serial.Serial(port='COM4', baudrate=115200, timeout=2)
+
 
 class SerialPort:
-    serport = serial.Serial(port='COM4', baudrate=115200, timeout=2)
     def switchAdb(self):
-        global serport
-        self.serport.write('\r$EEPD\r')
-        self.serport.write('\r$EEPU\r')
-        self.serport.write('\r$EEPP\r')
+        serport.write(b'\r$EEPD\r')
+        serport.write(b'\r$EEPU\r')
+        serport.write(b'\r$EEPP\r')
+
+
+if __name__ == "__main__":
+    SerialPort().switchAdb()

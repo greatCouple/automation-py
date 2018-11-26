@@ -8,7 +8,7 @@ import time, sys
 
 class LoginAndLogout:
     def loginTrainer(self):
-        ButtonManger.clickButton(const.btn_RelativeLayout)
+        # ButtonManger.clickButton(const.btn_RelativeLayout)
         try:
             self.button = ButtonManger.getButton(const.btn_trainer_tel)
             if self.button:
@@ -16,7 +16,6 @@ class LoginAndLogout:
                 time.sleep(5)
         except Exception as e:
             print('Please add user!')
-            self.logoutTrainer()
             self.loginAdmin()
             AccountManagement().createTrainer_User()
             self.logOut()
