@@ -4,4 +4,5 @@ desired_caps:
   appPackage: 'fitshang.com.shaperlauncher'
   appActivity: '.mvp.ui.view.main.MainActivity'
   automationName: 'uiautomator2'
+  deviceName: 'GB8ZA3OJCM'
 url: 'http://localhost:4723/wd/hub'

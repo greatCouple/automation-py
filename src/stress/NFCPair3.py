@@ -2,7 +2,8 @@
 import threading, time
 
 from src.steps.LoginAndLogout import LoginAndLogout
-from src.steps.AddUser import AddUser
+from src.steps.AddWirelessUser import AddWirelessUser
+from src.steps.AddWireUser import AddWireUser
 from src.utils.serport import serport
 from src.utils.LogUtil import LogUtil
 from src.utils.constant import const
@@ -14,6 +15,7 @@ class NFCPair3:
     def __init__(self):
         self.Log_file = Path().getLogPath('NFCPair3')
         self.NFClog_file = Path().getNFCLogPath('NFC')
+        LogUtil.log(self.Log_file, "Start NFCPair3 test !!!")
         # 教练登陆
         LoginAndLogout().loginTrainer()
 
@@ -28,12 +30,12 @@ class NFCPair3:
 
     def NFCPairing(self, pairTimes):
         n = 0
-        AddUser().addWireUser()
+        AddWireUser().addWireUser()
         ButtonManger.clickButton(const.btn_start)
         ButtonManger.clickButton(const.btn_MuscleDevelopment)
         for x in range(int(pairTimes)):
-            AddUser().clickAdd()
-            while AddUser().chooseWirelessMode():
+            AddWirelessUser().clickAdd()
+            while AddWirelessUser().chooseWirelessMode():
                 n += 1
                 LogUtil.log(self.Log_file, "NFC Pairing failed !!! Failed counter: " + str(n))
             LogUtil.log(self.Log_file, "NFC Pairing succeed !!! Succeed counter: " + str(x))
@@ -47,7 +49,6 @@ class NFCPair3:
         t2.join()
 
     def run(self, pairTimes, times):
-        LogUtil.log(self.Log_file, "Start NFCPair3 test !!!")
         self.thread(pairTimes)
 
 

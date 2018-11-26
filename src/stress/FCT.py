@@ -3,7 +3,8 @@ import sys
 from src.utils.LogUtil import LogUtil
 from src.steps.TrainingState import TrainingState
 from src.steps.LoginAndLogout import LoginAndLogout
-from src.steps.AddUser import AddUser
+#from src.steps.AddWirelessUser import AddWirelessUser
+from src.steps.AddWireUser import AddWireUser
 from src.utils.ButtonManger import ButtonManger
 from src.utils.constant import const
 from src.steps.ChangeWifi import ChangeWifi
@@ -16,8 +17,7 @@ def transferArgv():
     if len(sys.argv) < 2:
         print("Invalid parameters,please enter 1 parameter!")
         exit()
-    times = sys.argv[1]
-    return times
+    return sys.argv[1]
 
 
 class FunctionTest:
@@ -44,8 +44,8 @@ class FunctionTest:
                 ButtonManger.clickButton(const.btn_Professional)
             TrainingState().Start()
             ChangeWifi().changeWifi()
-            AddUser().addWirelessUser()
-            TrainingState().Start()
+            # AddWirelessUser().addWirelessUser()
+            # TrainingState().Start()
             TrainingState().Pause()
             TrainingState().Stop()
             ButtonManger.clickButton(const.btn_back)
@@ -54,21 +54,26 @@ class FunctionTest:
         LogUtil.log(self.Log_file, "Start Function test !!!")
         for n in range(int(times)):
             LogUtil.log(self.Log_file, "Funtion test times: " + str(n))
+            LogUtil.log(self.Log_file, "Login admin !!!")
             LoginAndLogout().loginAdmin()
+            LogUtil.log(self.Log_file, "Create Trainer and User !!!")
             AccountManagement().createTrainer_User()
+            LogUtil.log(self.Log_file, "Enter the system interface !!!")
             SystemSetting().systemSetting()
+            LogUtil.log(self.Log_file, "Admin back to home page !!!")
             LoginAndLogout().logOut()
+            LogUtil.log(self.Log_file, "Login trainer !!!")
             LoginAndLogout().loginTrainer()
-            AddUser().addWireUser()
-            AddUser().addWirelessUser()
+            LogUtil.log(self.Log_file, "Add wire mode user !!!")
+            AddWireUser().addWireUser()
+            # LogUtil.log(self.Log_file, "Add wireless mode user !!!")
+            # AddWirelessUser().addWirelessUser()
+            LogUtil.log(self.Log_file, "Let's do exercise !!!")
             self.doExercise()
+            LogUtil.log(self.Log_file, "Trainer back to home page !!!")
             LoginAndLogout().logOut()
 
 
 if __name__ == "__main__":
-    FunctionTest().run(1, 0)
-
-
-
-
-
+    # times1 = transferArgv()
+    FunctionTest().run(10000, 0)

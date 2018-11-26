@@ -1,10 +1,10 @@
-# -- coding: utf-8 --
 from src.utils.ButtonManger import ButtonManger
 from src.utils.constant import const
 from src.utils.serport import SerialPort
 import time
 
-class AddUser:
+
+class AddWirelessUser:
     def clickAdd(self):
         try:
             ButtonManger.clickButton(const.btn_add_user)
@@ -16,12 +16,6 @@ class AddUser:
         except Exception as e:
             pass
         ButtonManger.clickButton(const.btn_user_save)
-
-    # 教练添加有线模式学员
-    def addWireUser(self):
-        self.clickAdd()
-        ButtonManger.clickButton(const.btn_wire_mode)  # 选择有线模式
-        time.sleep(8)
 
     # 教练添加无线模式学员
     def addWirelessUser(self):

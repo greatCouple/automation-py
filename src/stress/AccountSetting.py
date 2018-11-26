@@ -22,10 +22,11 @@ def transferArgv():
 
 class AccountSetting:
     def __init__(self):
+        self.logFile = Path().getLogPath('AccountSetting')
+        LogUtil.log(self.logFile, "Start AccountSetting test !!!")
         # 管理员登陆
         LoginAndLogout().loginAdmin()
         ButtonManger.clickButton(const.btn_AccountSetting)  # 点击账户设置
-        self.logFile = Path().getLogPath('AccountSetting')
 
     def addTrainer(self, trainerTimes):
         for m in range(int(trainerTimes)):
@@ -47,7 +48,6 @@ class AccountSetting:
                 AccountManagement().createAccount(key, users.get(key))
 
     def run(self, trainerTimes, userTimes):
-        LogUtil.log(self.logFile, "Start AccountSetting test !!!")
         self.addTrainer(trainerTimes)
         self.addUser(userTimes)
 

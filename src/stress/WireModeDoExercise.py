@@ -1,12 +1,12 @@
 # -- coding: utf-8 --
 import sys
-
+from src.utils.constant import const
 from src.utils.LogUtil import LogUtil
 from src.steps.TrainingState import TrainingState
 from src.steps.LoginAndLogout import LoginAndLogout
-from src.steps.AddUser import AddUser
+from src.steps.AddWirelessUser import AddWirelessUser
 from src.utils.LogPath import Path
-from src.utils.serport import serport
+from src.utils.ButtonManger import ButtonManger
 
 
 def transferArgv():
@@ -22,15 +22,17 @@ def transferArgv():
 class WireModeDoExercise:
     def __init__(self):
         self.Log_file = Path().getLogPath('WireModeExercise')
+        LogUtil.log(self.Log_file, "Start WireModeDoExercise test !!!")
         LoginAndLogout().loginTrainer()
-        AddUser().addWireUser()
+        AddWirelessUser().addWireUser()
+        ButtonManger.clickButton(const.btn_start)
+        ButtonManger.clickButton(const.btn_MuscleDevelopment)
 
     def startAndPause(self, number1):
-        TrainingState().Start()
         for m in range(int(number1)):
             LogUtil.log(self.Log_file, "pause counter: " + str(m))
-            TrainingState().Pause()
             TrainingState().Start()
+            TrainingState().Pause()
 
     def startAndStop(self, number2):
         for n in range(int(number2)):
@@ -39,10 +41,8 @@ class WireModeDoExercise:
             TrainingState().Start()
 
     def run(self, number1, number2):
-        LogUtil.log(self.Log_file, "Start WireModeDoExercise test !!!")
         self.startAndPause(number1)
-        self.startAndPause(number2)
-        serport.close()
+        self.startAndStop(number2)
 
 
 if __name__ == "__main__":
