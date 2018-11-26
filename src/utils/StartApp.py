@@ -1,4 +1,4 @@
-import time,re,os
+import time, re, os
 from appium import webdriver
 from src.utils.YamlUtil import YamlUtil
 

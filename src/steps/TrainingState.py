@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from src.utils.ButtonManger import ButtonManger
 from src.utils.constant import const
-from main import driver
+from src.utils.StartApp import driver
 import time
 
 

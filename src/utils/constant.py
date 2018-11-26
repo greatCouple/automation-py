@@ -1,4 +1,4 @@
-# -- coding: utf-8 --
+import os
 
 
 class Const(object):
@@ -11,6 +11,7 @@ class Const(object):
 
 const = Const()
 
+const.work_path = os.path.abspath(os.path.join(os.getcwd(), "../.."))
 const.btn_add_user = "fitshang.com.shaperlauncher:id/iv_add_user"
 const.btn_tab_add = "fitshang.com.shaperlauncher:id/tv_tab_add"
 const.btn_manual_add = "fitshang.com.shaperlauncher:id/rtv_manual_check"
@@ -32,7 +33,7 @@ const.btn_abdomen = "fitshang.com.shaperlauncher:id/rtv_abdomen"
 const.btn_admin = "fitshang.com.shaperlauncher:id/comm_btn_admin"
 const.btn_nickname = "fitshang.com.shaperlauncher:id/et_user_nickname"
 const.btn_et_tel = "fitshang.com.shaperlauncher:id/et_tel"
-const.btn_create_pin = "fitshang.com.shaperlauncher:id/rtv_btn_user_create_pin"
+const.btn_user_create_pin = "fitshang.com.shaperlauncher:id/rtv_btn_user_create_pin"
 const.btn_trainer_name = 'fitshang.com.shaperlauncher:id/tv_item_trainer_name'
 const.btn_user_detail_edit = "fitshang.com.shaperlauncher:id/ll_user_detail_edit"
 const.btn_user_delete = "fitshang.com.shaperlauncher:id/rtv_btn_user_delete"

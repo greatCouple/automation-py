@@ -1,11 +1,12 @@
-from src.utils.ProjectPath import Path
+from ProjectPath import work_path
 import yaml, os
 
 
 class YamlUtil:
     @staticmethod
     def read(fileName):
-        file = Path().work_path + "/config/" + fileName + '.yaml'
+        file = work_path + "/config/" + fileName + '.yaml'
+        print(file)
         if os.path.exists(file):
             pass
         else:
@@ -15,4 +16,4 @@ class YamlUtil:
 
 
 if __name__ == '__main__':
-    YamlUtil.read('trainer')
+    YamlUtil.read('driverConfig')

@@ -5,7 +5,7 @@ from src.utils.LogUtil import LogUtil
 from src.steps.TrainingState import TrainingState
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
-from src.utils.ProjectPath import Path
+from src.utils.LogPath import Path
 
 
 def transferArgv():
@@ -20,7 +20,7 @@ def transferArgv():
 
 class WireModeDoExercise:
     def __init__(self):
-        self.Log_file = Path().logPath('WireModeExercise')
+        self.Log_file = Path().getLogPath('WireModeExercise')
         LoginAndLogout().loginTrainer()
         AddUser().addWireUser()
 
@@ -38,10 +38,10 @@ class WireModeDoExercise:
             TrainingState().Start()
 
     def run(self, number1, number2):
+        LogUtil.log(self.Log_file, "Start WireModeDoExercise test !!!")
         self.startAndPause(number1)
         self.startAndPause(number2)
 
 
 if __name__ == "__main__":
-    WireModeDoExercise().startAndPause(3)
-    WireModeDoExercise().startAndStop(3)
+    WireModeDoExercise().run(1, 1)

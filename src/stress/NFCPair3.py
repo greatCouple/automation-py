@@ -1,37 +1,31 @@
 # -- coding: utf-8 --
-import threading, time, sys
+import threading, time
 
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
-from src.steps.ChangeWifi import ChangeWifi
 from src.utils.serport import SerialPort
 from src.utils.LogUtil import LogUtil
-from src.utils.ProjectPath import Path
+from src.utils.constant import const
+from src.utils.ButtonManger import ButtonManger
+from src.utils.LogPath import Path
 
 
-def transferArgv():
-    if len(sys.argv) < 2:
-        print("Invalid parameters,please enter 1 parameter!")
-        exit()
-    PairTimes = sys.argv[1]
-    return PairTimes
-
-
-class NFCPair1:
+class NFCPair3:
     def __init__(self):
-        self.Log_file = Path().logPath('NFCpairing')
-        self.NFClog_file = Path().nfcLogPath('NFC')
+        self.Log_file = Path().getLogPath('NFCPair3')
+        self.NFClog_file = Path().getNFCLogPath('NFC')
         # 教练登陆
         LoginAndLogout().loginTrainer()
 
-        self.match_state = None
-
     def SaveLog(self):
-        SerialPort.serport.write(b'\r$EMD9\r')
+        SerialPort.serport.write('\r$EMD9\r')
         time.sleep(1)
-        SerialPort.serport.write(b'\r$EMD4\r')
+        SerialPort.serport.write('\r$EMD4\r')
         time.sleep(1)
         while True:
+            #		if str_towrite is not None:
+            #			serport.write(str_towrite)
+            #			str_towrite = None
             data = SerialPort.serport.readline()
             LogUtil.log(self.NFClog_file, repr(data))
 
@@ -39,14 +33,15 @@ class NFCPair1:
         t1 = threading.Thread(target=self.SaveLog)
         t1.start()
         n = 0
+        AddUser().addWireUser()
+        ButtonManger.clickButton(const.btn_start)
+        ButtonManger.clickButton(const.btn_MuscleDevelopment)
         for x in range(int(pairTimes)):
             AddUser().clickAdd()
             while AddUser().chooseWirelessMode():
                 n += 1
                 LogUtil.log(self.Log_file, "NFC Pairing failed !!! Failed counter: " + str(n))
             LogUtil.log(self.Log_file, "NFC Pairing succeed !!! Succeed counter: " + str(x))
-            LogUtil.log(self.Log_file, "Change wifi id :" + str(x))
-            ChangeWifi().changeWifi()
 
     def thread(self, pairTimes):
         t2 = threading.Thread(target=self.NFCPairing(pairTimes))
@@ -54,10 +49,11 @@ class NFCPair1:
         t2.start()
         t2.join()
 
-    def run(self, pairTimes):
+    def run(self, pairTimes, times):
+        LogUtil.log(self.Log_file, "Start NFCPair3 test !!!")
         self.thread(pairTimes)
 
 
 if __name__ == "__main__":
-    NFCPair1().thread(3)
+    NFCPair3().run(1, 0)
 #	driver.quit()

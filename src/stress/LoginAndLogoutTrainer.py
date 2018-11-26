@@ -2,12 +2,12 @@
 from src.utils.LogUtil import LogUtil
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AddUser import AddUser
-from src.utils.ProjectPath import Path
+from src.utils.LogPath import Path
 
 
 class LoginAndLogoutTrainer:
     def __init__(self):
-        self.logFile = Path().logPath('LoginAndLogoutTrainer')
+        self.logFile = Path().getLogPath('LoginAndLogoutTrainer')
         print(self.logFile)
 
     def loginAndLogoutTrainer(self, times):
@@ -18,9 +18,10 @@ class LoginAndLogoutTrainer:
             LoginAndLogout().logoutTrainer()
             LogUtil.log(self.logFile, "Times " + str(x))
 
-    def run(self, times):
+    def run(self, times, times2):
+        LogUtil.log(self.logFile, "Start LoginAndLogout test !!!")
         self.loginAndLogoutTrainer(times)
 
 
 if __name__ == "__main__":
-    LoginAndLogoutTrainer().run(2)
+    LoginAndLogoutTrainer().run(1, 0)

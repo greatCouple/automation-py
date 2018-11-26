@@ -6,7 +6,7 @@ from src.utils.LogUtil import LogUtil
 from src.utils.ButtonManger import ButtonManger
 from src.steps.LoginAndLogout import LoginAndLogout
 from src.steps.AccountManagement import AccountManagement
-from src.utils.ProjectPath import Path
+from src.utils.LogPath import Path
 from src.utils.YamlUtil import YamlUtil
 
 
@@ -25,7 +25,7 @@ class AccountSetting:
         # 管理员登陆
         LoginAndLogout().loginAdmin()
         ButtonManger.clickButton(const.btn_AccountSetting)  # 点击账户设置
-        self.logFile = Path().logPath('AccountSetting')
+        self.logFile = Path().getLogPath('AccountSetting')
 
     def addTrainer(self, trainerTimes):
         for m in range(int(trainerTimes)):
@@ -47,9 +47,10 @@ class AccountSetting:
                 AccountManagement().createAccount(key, users.get(key))
 
     def run(self, trainerTimes, userTimes):
+        LogUtil.log(self.logFile, "Start AccountSetting test !!!")
         self.addTrainer(trainerTimes)
         self.addUser(userTimes)
 
 
 if __name__ == "__main__":
-    AccountSetting().run(2, 2)
+    AccountSetting().run(1, 1)

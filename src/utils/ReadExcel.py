@@ -1,10 +1,10 @@
 import xlrd, os
-from src.utils.ProjectPath import Path
+from ProjectPath import work_path
 
 
 class ReadExcel:
     def __init__(self):
-        self.file_path = Path().work_path + "\\testcase\\"
+        self.file_path = work_path + "\\testcase\\"
         xlrd.Book.encoding = "utf8"
         self.file_name = self.file_path + 'TestCase.xls'
         if os.path.exists(self.file_name):
@@ -13,9 +13,9 @@ class ReadExcel:
             raise FileNotFoundError('测试用例不存在')
         self._data = []
 
-    def readExcel(self, sheetname):
+    def readExcel(self, sheetName):
         self.file = xlrd.open_workbook(self.file_name)
-        self.sheet = self.file.sheet_by_name(sheetname)
+        self.sheet = self.file.sheet_by_name(sheetName)
         self.rows_num = self.sheet.nrows  # 读取总行数
         self.cols_num = self.sheet.ncols  # 读取列列数
         for i in range(1,self.rows_num):

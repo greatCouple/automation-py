@@ -8,7 +8,7 @@ from src.utils.ButtonManger import ButtonManger
 from src.utils.constant import const
 from src.steps.ChangeWifi import ChangeWifi
 from src.steps.SystemSetting import SystemSetting
-from src.utils.ProjectPath import Path
+from src.utils.LogPath import Path
 from src.steps.AccountManagement import AccountManagement
 
 
@@ -22,7 +22,7 @@ def transferArgv():
 
 class FunctionTest:
     def __init__(self):
-        self.Log_file = Path().logPath('FCT')
+        self.Log_file = Path().getLogPath('FCT')
 
     def doExercise(self):
         ButtonManger.clickButton(const.btn_start)
@@ -50,11 +50,12 @@ class FunctionTest:
             TrainingState().Stop()
             ButtonManger.clickButton(const.btn_back)
 
-    def run(self, times):
+    def run(self, times, times2):
+        LogUtil.log(self.Log_file, "Start Function test !!!")
         for n in range(int(times)):
             LogUtil.log(self.Log_file, "Funtion test times: " + str(n))
             LoginAndLogout().loginAdmin()
-            # AccountManagement().createTrainer_User()
+            AccountManagement().createTrainer_User()
             SystemSetting().systemSetting()
             LoginAndLogout().logOut()
             LoginAndLogout().loginTrainer()
@@ -65,7 +66,7 @@ class FunctionTest:
 
 
 if __name__ == "__main__":
-    FunctionTest().run(2)
+    FunctionTest().run(1, 0)
 
 
 

@@ -12,8 +12,8 @@ class AccountManagement:
         self.account = account
         self.password = password
         ButtonManger.clickButton(const.btn_tab_add)  # 点击添加按钮
-        ButtonManger.clickButton(const.btn_user_nickname)
-        ButtonManger.getButton(const.btn_user_nickname).send_keys(self.account)  # 设置账号
+        ButtonManger.clickButton(const.btn_nickname)
+        ButtonManger.getButton(const.btn_nickname).send_keys(self.account)  # 设置账号
         ButtonManger.clickButton(const.btn_et_tel)
         ButtonManger.getButton(const.btn_et_tel).send_keys(self.password)  # 设置电话
         ButtonManger.clickButton(const.btn_user_create_pin)
@@ -23,8 +23,8 @@ class AccountManagement:
         ButtonManger.clickButton(const.btn_user_save)  # 点击创建
         time.sleep(5)
         try:
-            self.nickname1 = ButtonManger.getButton(const.btn_trainer_name).text
-            if self.nickname1 == self.account:
+            self.nickName1 = ButtonManger.getButton(const.btn_trainer_name).text
+            if self.nickName1 == self.account:
                 print("Create " + account + " successfully!")
         except Exception as e:
             print("Failed to create user!")
@@ -47,16 +47,16 @@ class AccountManagement:
 
     # 删除所有学员
     def deleteAll(self):
-        self.nickname2 = ButtonManger.getButton(const.btn_trainer_name).text
-        while self.nickname2 != "Add New Account":
+        self.nickName2 = ButtonManger.getButton(const.btn_trainer_name).text
+        while self.nickName2 != "Add New Account":
             self.deleteAccount()
-            self.nickname2 = ButtonManger.getButton(const.btn_trainer_name).text
+            self.nickName2 = ButtonManger.getButton(const.btn_trainer_name).text
 
     # 创建账户
     def createTrainer_User(self):
         ButtonManger.clickButton(const.btn_AccountSetting)  # 点击账户设置
-        self.nickname2 = ButtonManger.getButton(const.btn_trainer_name).text
-        if self.nickname2 != "Add New Account":
+        self.nickName2 = ButtonManger.getButton(const.btn_trainer_name).text
+        if self.nickName2 != "Add New Account":
             self.deleteAll()
             print("Delete all the trainers!")
         trainers = YamlUtil.read('trainer')
@@ -65,8 +65,8 @@ class AccountManagement:
         ButtonManger.clickButton(const.btn_tab_user)  # 切换到学员添加界面
         time.sleep(3)
 
-        self.nickname3 = ButtonManger.getButton(const.btn_trainer_name).text
-        if self.nickname3 != "Add New Account":
+        self.nickName3 = ButtonManger.getButton(const.btn_trainer_name).text
+        if self.nickName3 != "Add New Account":
             self.deleteAll()
             print("Delete all the users!")
         users = YamlUtil.read('user')
